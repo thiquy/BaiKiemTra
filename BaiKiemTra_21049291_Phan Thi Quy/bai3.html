@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thời gian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .time-container {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            position: relative;
+        }
+
+        #thoi-gian {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-container" id="timeContainer">
+        <i class="fas fa-clock icon"></i>
+        <div id="thoi-gian"></div>
+    </div>
+    <script>
+        function hienThiThoiGian() {
+            var divThoiGian = document.getElementById("thoi-gian");
+            var thoiGianHienTai = new Date();
+            var gio = thoiGianHienTai.getHours();
+            var phut = thoiGianHienTai.getMinutes();
+            var giay = thoiGianHienTai.getSeconds();
+            var buoi = (gio < 12) ? "AM" : "PM"; // Xác định buổi AM/PM
+
+            // Chuyển các giờ/phút/giây có một chữ số sang dạng có hai chữ số
+            gio = gio % 12 || 12; // Đổi giờ sang định dạng 12 giờ
+            gio = gio < 10 ? "0" + gio : gio;
+            phut = phut < 10 ? "0" + phut : phut;
+            giay = giay < 10 ? "0" + giay : giay;
+
+            var thoiGian = gio + ":" + phut + ":" + giay + " " + buoi;
+
+            divThoiGian.textContent = thoiGian;
+        }
+
+        // Gọi hàm để hiển thị thời gian ban đầu và cập nhật mỗi giây
+        hienThiThoiGian();
+        setInterval(hienThiThoiGian, 1000);
+    </script>
+</body>
+</html>
